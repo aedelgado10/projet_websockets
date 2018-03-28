@@ -20,11 +20,17 @@
 			var cx = new WebSocket(host);
 
 			console.log(cx.readyState);
+
+			var meteoTest = {
+				"cmd" : 'meteo',
+				"city" : "Toulouse",
+			};
+
 			cx.onopen = function(msg){
 				console.log(msg);
 			};
 
-			cx.onmessage = function(msg){ console.log("Received: "+msg.data); };
+			cx.onmessage = function(msg){ console.log(msg); };
 			cx.onclose   = function(msg){ console.log("Disconnected - status "+this.readyState); };
 		}catch(ex){
 			console.log(ex);
