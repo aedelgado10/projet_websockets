@@ -11,7 +11,7 @@
 </head>
 <body>
 
-	<h1 id="banner-title">Plateforme de Partage de Compétences</h1>	
+	<h1 id="banner-title">Création de Compte</h1>	
 
 	<!-- Formulaire pour se connecter-->
         <div id="login-box" class="login-popup">
@@ -33,10 +33,40 @@
         </div>
 
         <div id="register-box" class="register-popup">
-        	<p><i>Nouvel arrivant?</i></p>
-        	<form class="signup" action="register.php">
-        		<button class="submit button" type="submit">Créer un compte</button>
+        	<p><b>Données de l'utilisateur</b></p>
+        	<form method="post" class="signup" action="inputRegister.php">
+			  Prénom:<br>
+			  <input type="text" name="prenom" value="">
+			  <br>
+			  Nom:<br>
+			  <input type="text" name="nom" value="">
+			  <br>
+			  Login:<br>
+			  <input type="text" name="login" value="">
+			  <br>
+			  Mot de passe:<br>
+			  <input type="text" name="mdp" value="">
+			  <br>
+			  Adresse:<br>
+			  <input type="text" name="adresse" value="">
+			  <br>
+			  Téléphone:<br>
+			  <input type="text" name="telephone" value="">
+			  <br>
+			  Mail:<br>
+			  <input type="text" name="mail" value="">
+			  <br>
+			  <br>
+			  <strong> /!\ -- MONTRER À L'USER UNE LISTE DE ACTIVITÉS À CHOISIR -- /!\ </strong>
+			  <br><br>
+			  <input type="submit" value="Créer">
         	</form>
+
+        	<a href="index.php"> 
+        		<button>
+        			Annuler
+        		</button>
+        	</a>
         </div>	
 
 
@@ -64,17 +94,11 @@
 			var cx = new WebSocket(host);
 
 			console.log(cx.readyState);
-
-			var meteoTest = {
-				"cmd" : 'meteo',
-				"city" : "Toulouse",
-			};
-
 			cx.onopen = function(msg){
 				console.log(msg);
 			};
 
-			cx.onmessage = function(msg){ console.log(msg); };
+			cx.onmessage = function(msg){ console.log("Received: "+msg.data); };
 			cx.onclose   = function(msg){ console.log("Disconnected - status "+this.readyState); };
 		}catch(ex){
 			console.log(ex);
