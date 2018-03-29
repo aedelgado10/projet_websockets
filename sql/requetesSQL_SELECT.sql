@@ -8,7 +8,7 @@ SELECT nomA,typeA FROM Activite GROUP BY nomA #Les Deux
 -- À REVOIR
 SELECT idPersonne, nomP
 FROM personne
-WHERE idPersonne = (SELECT e1.idPersonne
+WHERE idPersonne IN (SELECT e1.idPersonne
 					FROM etre_disponible as e1, etre_disponible as e2
 					WHERE e1.idCalendrier = e2.idCalendrier and e1.idPersonne != e2.idPersonne
                     GROUP BY e1.idPersonne);
