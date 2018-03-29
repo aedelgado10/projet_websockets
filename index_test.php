@@ -56,30 +56,6 @@
 
 	<script type="text/javascript" src="config/modules/bootstrap4/js/bootstrap.js"></script>
 	<script type="text/javascript" src="config/modules/jquery/jquery-3.3.1.min.js"></script>
-
-	<script type="text/javascript">
-		var host = "<?php echo WS_HOST; ?>";
-
-		try{
-			var cx = new WebSocket(host);
-
-			console.log(cx.readyState);
-
-			var meteoTest = {
-				"cmd" : 'meteo',
-				"city" : "Toulouse",
-			};
-
-			cx.onopen = function(msg){
-				console.log(msg);
-			};
-
-			cx.onmessage = function(msg){ console.log(msg); };
-			cx.onclose   = function(msg){ console.log("Disconnected - status "+this.readyState); };
-		}catch(ex){
-			console.log(ex);
-		}
-	</script>
 </body>
 </html>
 
