@@ -14,7 +14,7 @@
 			$stm = $dbh->prepare($req);
 			$res = $stm->execute();
 
-			return [$stm,$res];
+			return array($stm,$res);
 		}
 
 		return false;

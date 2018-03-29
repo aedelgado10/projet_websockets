@@ -11,7 +11,13 @@
 <body>
 
 	<div>
-		<textarea id="texto"></textarea>
+		<label>Le service est actuellement: <span id='status_ws'></span></label>
+
+		<!--<button onclick="close_ws(cx);">Arrêter le service</button>-->
+
+		<h1>Le temps:<h1>
+		<p id="texto"><?php echo date("Y-m-d",1522357200); ?></p>
+
 	</div>
 	<script type="text/javascript" src="functions.js"></script>
 	<script type="text/javascript">
@@ -20,23 +26,24 @@
 		try{
 			var cx = new WebSocket(host);
 
-			console.log(cx.readyState);
-
 			var meteoTest = {
-				"cmd" : "meteo",
+				"cmd" : "meteo_f",
 				"city" : "Toulouse"
 			};
 
 			cx.onopen = function(msg){
-				console.log(msg);
+				$('#status_ws').html(service_status(this.readyState));
 			};
 
 			cx.onmessage = function(msg){
 				console.log(JSON.parse(msg.data));
-				$('#texto').append(JSON.parse(msg.data));
+				$('#texto').html(JSON.parse(msg.data));
 			};
 
-			cx.onclose   = function(msg){ console.log("Disconnected - status "+this.readyState); };
+			cx.onclose   = function(msg){ 
+				$('#status_ws').html(service_status(this.readyState));
+			};
+
 		}catch(ex){
 			console.log(ex);
 		}
