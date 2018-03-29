@@ -24,7 +24,7 @@ CREATE TABLE Calendrier(
         idCalendrier Int NOT NULL auto_increment,
         dateC        Date ,
         heureC       Time ,
-        tempsMeteoC  Varchar (25) ,
+        duree  int ,
         PRIMARY KEY (idCalendrier )
 )ENGINE=InnoDB;
 

@@ -32,8 +32,8 @@ function base_start($secure = false)
 		<!DOCTYPE html>
 		<html lang=\"fr\">
 			<?php
-				include './config/config.php';
-				include './Classes/ConnexionBD.php';
+				include_once './config/config.php';
+				include_once './Classes/ConnexionBD.php';
 			?>
 			<head>
 				<meta charset=\"utf-8\">

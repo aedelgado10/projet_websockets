@@ -1,26 +1,11 @@
 <?php 
     include 'defaults.php';
+    include_once './Classes/ConnexionBD.php';
     base_start();
  ?>
 
-	<!-- Formulaire pour se connecter-->
-        <div id="login-box" class="login-popup">
-          <form method="post" class="signin" action="connexion.php">
-                <fieldset class="textbox">
-	                <label class="username">
-		                <span>Identifiant</span>
-		                <input id="username" name="username" value="" type="text" autocomplete="on" placeholder="identifiant">
-	                </label>
-	                
-	                <label class="password">
-		                <span>Mot de Passe</span>
-		                <input id="password" name="password" value="" type="password" placeholder="mot de passe">
-	                </label>
-	                
-	                <button class="submit button" type="submit">Se Connecter</button>
-                </fieldset>
-          </form>
-        </div>
+
+ 		<!-- DÉBUT DU CONTENU DE LA PAGE-->
 
         <h2 id="banner-title">Création de Compte</h2>	
 
@@ -29,30 +14,102 @@
         	<p><b>Données de l'utilisateur</b></p>
         	<form method="post" class="signup" action="inputRegister.php">
 			  Prénom:<br>
-			  <input type="text" name="prenom" value="">
+			  <input type="text" name="prenom" value="" placeholder="Jean">
 			  <br>
 			  Nom:<br>
-			  <input type="text" name="nom" value="">
+			  <input type="text" name="nom" value="" placeholder="Dupont">
 			  <br>
 			  Login:<br>
-			  <input type="text" name="login" value="">
+			  <input type="text" name="login" value="" placeholder="jd">
 			  <br>
 			  Mot de passe:<br>
-			  <input type="text" name="mdp" value="">
+			  <input type="password" name="mdp" value="" placeholder="******">
 			  <br>
 			  Adresse:<br>
-			  <input type="text" name="adresse" value="">
+			  <input type="text" name="adresse" value="" placeholder="Avenue de l'université">
 			  <br>
-			  Téléphone:<br>
-			  <input type="text" name="telephone" value="">
+			  Téléphone:<br> 
+			  <input type="text" name="telephone" value="" placeholder="06 69 69 69 69">
 			  <br>
 			  Mail:<br>
-			  <input type="text" name="mail" value="">
+			  <input type="text" name="mail" value="" placeholder="Jean@dupont.com">
 			  <br>
 			  <br>
-			  <strong> /!\ -- MONTRER À L'USER UNE LISTE DE ACTIVITÉS À CHOISIR -- /!\ </strong>
+			  
+			  <br><br>
+			  
+
+			  <h3> Activité que vous souhaitez apprendre </h3>
+
+			  <?php  
+			  		$query = "SELECT nomA FROM Activite GROUP BY nomA";
+
+				    // exécution de la requête sql
+				    $res = exec_select($dbh,$query); 
+				    $resultats = [];
+				    while ($data = $res[0]->fetch(PDO::FETCH_ASSOC)){
+				            $resultats[] = $data;
+				    }
+
+				  	foreach ($resultats as $key => $value) {
+				  		$val = $resultats[$key]['nomA'];
+				  		echo "<input type=\"radio\" name=\"gender\" value=\"$val\"> $val <br>";
+
+				  		$query2 = "SELECT typeA FROM Activite WHERE nomA='$val' GROUP BY typeA";
+
+				  		$res2 = exec_select($dbh,$query2); 
+				   		$resultats2 = [];
+				   		while ($data2 = $res2[0]->fetch(PDO::FETCH_ASSOC)){
+				        	$resultats2[] = $data2;
+				    	}
+
+				    	echo "<select name=\"$val\">";
+				    	foreach ($resultats2 as $key2 => $value2) {
+				    		    $val2 = $resultats2[$key2]['typeA'];
+    							echo "<option value=\"$val2\"> $val2 </option>";
+				    	}
+				    	echo "</select> <br>";
+				  	}
+				    
+			  ?>
+
+			  <h3> Activité que vous souhaitez enseigner </h3>
+
+			  <?php  
+			  		$query = "SELECT nomA FROM Activite GROUP BY nomA";
+
+				    // exécution de la requête sql
+				    $res = exec_select($dbh,$query); 
+				    $resultats = [];
+				    while ($data = $res[0]->fetch(PDO::FETCH_ASSOC)){
+				            $resultats[] = $data;
+				    }
+
+				  	foreach ($resultats as $key => $value) {
+				  		$val = $resultats[$key]['nomA'];
+				  		echo "<input type=\"radio\" name=\"gender\" value=\"$val\"> $val <br>";
+
+				  		$query2 = "SELECT typeA FROM Activite WHERE nomA='$val' GROUP BY typeA";
+
+				  		$res2 = exec_select($dbh,$query2); 
+				   		$resultats2 = [];
+				   		while ($data2 = $res2[0]->fetch(PDO::FETCH_ASSOC)){
+				        	$resultats2[] = $data2;
+				    	}
+
+				    	echo "<select name=\"$val\">";
+				    	foreach ($resultats2 as $key2 => $value2) {
+				    		    $val2 = $resultats2[$key2]['typeA'];
+    							echo "<option value=\"$val2\"> $val2 </option>";
+				    	}
+				    	echo "</select> <br>";
+				  	}
+				    
+			  ?>
+
 			  <br><br>
 			  <input type="submit" value="Créer">
+
         	</form>
 
         	<a href="index_test.php"> 
