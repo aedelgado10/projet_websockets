@@ -8,11 +8,62 @@
 		}
 		private function get_weather($city){
 			if (!empty($city)){
-				$request = PAPI."$city"."&appid=".KAPI;
+				$request = PAPI."weather?q=$city"."&appid=".KAPI;
 				$w_result = json_decode($this->get_from_api($request),true);
 				return $w_result;
 			}
 		}
+
+		private function get_forecast($city){
+			if (!empty($city)){
+				$request = PAPI."forecast?q=$city"."&appid=".KAPI;
+				$w_result = json_decode($this->get_from_api($request),true);
+				return $w_result;
+			}	
+		}
+
+		// Récupérer la liste des météo (5j/3h) donnée par l'API
+		private function get_wlist($w_result){
+			if ((!empty($w_result)) && (is_array($w_result))){
+				array_key_exists("list", $w_result);
+				return $w_result["list"];
+			}
+		}
+
+		public static function get_date($element){
+			if ((!empty($element)) && (is_array($element))){
+				array_key_exists("dt", $element);
+				return $element["dt"];
+			}
+		}
+
+		public static function pdateFr(int $timestamp){
+			return date('d-m-Y',$timestamp);
+		}
+
+		/**
+		*	@param : $date_input  : la date que l'on récupère au format unix timestamp
+		*	@param : $date_donnée : la date à laquelle on la compare au format unix timestamp
+		*	@return : boolean{
+		*				true : si les dates sont identiques
+		*				false : sinon
+		*			}
+		*	Cette fonction compare les deux dates. 
+		*/
+		public static function est_jour(int $date_input, int $date_donnee){
+			$d_i = Partage::pdateFr($date_input);
+			$d_d = Partage::pdateFr($date_donnee);
+
+			return ($d_d == $d_i);
+		}
+
+
+		public static function toDateFr($date_en){
+			$a_date = explode("-", $date_en);
+			
+			return $a_date[2]."/".$a_date[1]."/".$a_date[0]; 
+		}
+
 
 		private function get_wicon($w_result){
 
@@ -28,15 +79,23 @@
 				$infos = json_decode($msg,true);
 
 				if (isset($infos["cmd"])){
-					if ($infos["cmd"] == 'meteo'){
-					$w_result = $this->get_weather($infos["city"]);
-					$this->sendjson($user,$w_result);
-					$this->sendjson($user,$this->get_wicon($w_result));
-					//var_dump($w_result);
-					//var_dump($this->get_wicon($w_result));	
+					if ($infos["cmd"] == 'meteo_j'){
+						$w_result = $this->get_weather($infos["city"]);
+						$this->sendjson($user,$w_result);
+						$this->sendjson($user,$this->get_wicon($w_result));
+						return true;
+					}else if($infos["cmd"] == 'meteo_f'){
+						$w_result = $this->get_forecast($infos["city"]);
+						$liste = $this->get_wlist($w_result);
+
+						foreach ($liste as $k => $data) {
+							$date_meteo = Partage::pdateFr($this->get_date($data));
+							$this->send($date_meteo);
+						}
+						//$this->sendjson($user,$w_result);
+						return true;
 					}
 				}
-				//$this->send($user->socket,);
 			}
 		}
 
