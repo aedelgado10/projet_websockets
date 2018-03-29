@@ -10,8 +10,6 @@ INSERT INTO Activite VALUES (8,'Sport', 'Musculation', 0);
 INSERT INTO Activite VALUES (9,'Sport', 'Football', 1);
 INSERT INTO Activite VALUES (10,'Cuisine', 'Desserts', 0);
 INSERT INTO Activite VALUES (11,'Cuisine', 'Cueillir des fruits', 1);
-INSERT INTO Activite VALUES (12,'Sexe', 'Kamasutra', 0);
-INSERT INTO Activite VALUES (13,'Sexe', 'Orgies Outdoor', 1);
 
 #-- Calendrier -- idCalendrier,dateC,HeureC,tempsMeteoC,
 INSERT INTO Calendrier VALUES (1,'2018-03-31','10:00:00','Decouvert');
@@ -36,18 +34,18 @@ INSERT INTO Personne VALUES (7,'Nady','Keraghel','nk','123','Boulevard du biceps
 INSERT INTO Personne VALUES (8,'Fred','Ferrera','fferrera','123','Rue du doigt dans le nez, Pau','06 00 09 70 54', 'federico@ronaldinho.br');
 
 #-- Interesser -- typeInteret, idActivite,IdPersonne
-INSERT INTO Interesser VALUES ('Enseigner',13,1);
+INSERT INTO Interesser VALUES ('Enseigner',9,1);
 INSERT INTO Interesser VALUES ('Enseigner',4,3);
 INSERT INTO Interesser VALUES ('Enseigner',11,6);
 INSERT INTO Interesser VALUES ('Enseigner',2,5);
-INSERT INTO Interesser VALUES ('Apprendre',13,7);
+INSERT INTO Interesser VALUES ('Apprendre',9,7);
 INSERT INTO Interesser VALUES ('Apprendre',4,4);
 INSERT INTO Interesser VALUES ('Apprendre',11,2);
 INSERT INTO Interesser VALUES ('Apprendre',7,8);
 
 #-- Cette table normalement devrait être saisie/remplie par le site. Des que celui ci trouvera des coincidences.
 #-- Rencontre -- idCalenderierR,idActiviteR,idPersonne1,idPersonne2
-INSERT INTO Rencontre VALUES (5,13,1,7);
+INSERT INTO Rencontre VALUES (5,9,1,7);
 INSERT INTO Rencontre VALUES (4,4,3,4);
 INSERT INTO Rencontre VALUES (3,11,6,2);
 

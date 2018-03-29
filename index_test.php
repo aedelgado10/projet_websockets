@@ -8,9 +8,12 @@
 	<title>Partage de compétences</title>
 	<link rel="stylesheet" type="text/css" href="config/modules/bootstrap4/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="config/modules/bootstrap4/css/bootstrap.css">
+
+	<?php 
+   		include 'ConnexionBD.php';
+   	?>
 </head>
 <body>
-
 	<h1 id="banner-title">Plateforme de Partage de Compétences</h1>	
 
 	<!-- Formulaire pour se connecter-->

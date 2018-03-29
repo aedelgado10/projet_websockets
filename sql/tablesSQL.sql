@@ -8,7 +8,7 @@
 #------------------------------------------------------------
 
 CREATE TABLE Activite(
-        idActivite Int NOT NULL ,
+        idActivite Int NOT NULL auto_increment,
         nomA       Varchar (25) ,
         typeA      Varchar (25) ,
         needMeteoA Bool ,
@@ -21,7 +21,7 @@ CREATE TABLE Activite(
 #------------------------------------------------------------
 
 CREATE TABLE Calendrier(
-        idCalendrier Int NOT NULL ,
+        idCalendrier Int NOT NULL auto_increment,
         dateC        Date ,
         heureC       Time ,
         tempsMeteoC  Varchar (25) ,
@@ -34,7 +34,7 @@ CREATE TABLE Calendrier(
 #------------------------------------------------------------
 
 CREATE TABLE Personne(
-        idPersonne Int NOT NULL ,
+        idPersonne Int NOT NULL auto_increment,
         prenomP    Varchar (25) ,
         nomP       Varchar (25) ,
         login      Varchar (25) ,
