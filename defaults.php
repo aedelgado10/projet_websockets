@@ -86,8 +86,11 @@ function base_start($secure = false)
         				</div>	
 						";
 	   			 }
-		                                
+		                            
 				echo "	</div>";
+
+
+				echo "<h5> Notre site a été visité : $visites fois!!<h5>";
 
 				
 
