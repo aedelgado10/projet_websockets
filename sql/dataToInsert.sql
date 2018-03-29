@@ -34,27 +34,35 @@ INSERT INTO Personne VALUES (7,'Nady','Keraghel','nk','123','Boulevard du biceps
 INSERT INTO Personne VALUES (8,'Fred','Ferrera','fferrera','123','Rue du doigt dans le nez, Pau','06 00 09 70 54', 'federico@ronaldinho.br');
 
 #-- Interesser -- typeInteret, idActivite,IdPersonne
-INSERT INTO Interesser VALUES ('Enseigner',9,1);
-INSERT INTO Interesser VALUES ('Enseigner',4,3);
-INSERT INTO Interesser VALUES ('Enseigner',11,6);
-INSERT INTO Interesser VALUES ('Enseigner',2,5);
-INSERT INTO Interesser VALUES ('Apprendre',9,7);
-INSERT INTO Interesser VALUES ('Apprendre',4,4);
-INSERT INTO Interesser VALUES ('Apprendre',11,2);
-INSERT INTO Interesser VALUES ('Apprendre',7,8);
+INSERT INTO Interesser VALUES ('Enseigner',1,1);
+INSERT INTO Interesser VALUES ('Enseigner',2,2);
+INSERT INTO Interesser VALUES ('Enseigner',3,3);
+INSERT INTO Interesser VALUES ('Enseigner',4,4);
+INSERT INTO Interesser VALUES ('Enseigner',5,5);
+INSERT INTO Interesser VALUES ('Enseigner',6,6);
+INSERT INTO Interesser VALUES ('Enseigner',7,7);
+INSERT INTO Interesser VALUES ('Enseigner',8,8);
+INSERT INTO Interesser VALUES ('Apprendre',8,1);
+INSERT INTO Interesser VALUES ('Apprendre',7,2);
+INSERT INTO Interesser VALUES ('Apprendre',6,3);
+INSERT INTO Interesser VALUES ('Apprendre',5,4);
+INSERT INTO Interesser VALUES ('Apprendre',4,5);
+INSERT INTO Interesser VALUES ('Apprendre',3,6);
+INSERT INTO Interesser VALUES ('Apprendre',2,7);
+INSERT INTO Interesser VALUES ('Apprendre',1,8);
+
 
 #-- Cette table normalement devrait être saisie/remplie par le site. Des que celui ci trouvera des coincidences.
 #-- Rencontre -- idCalenderierR,idActiviteR,idPersonne1,idPersonne2
-INSERT INTO Rencontre VALUES (5,9,1,7);
-INSERT INTO Rencontre VALUES (4,4,3,4);
-INSERT INTO Rencontre VALUES (3,11,6,2);
+INSERT INTO Rencontre VALUES (1,1,1,8);
+INSERT INTO Rencontre VALUES (3,3,3,6);
+INSERT INTO Rencontre VALUES (4,4,4,5);
 
 #-- Être Dispo -- idCalendrier, idPersonne
+INSERT INTO Etre_Disponible VALUES (1,1);
 INSERT INTO Etre_Disponible VALUES (1,8);
-INSERT INTO Etre_Disponible VALUES (2,5);
+INSERT INTO Etre_Disponible VALUES (3,3);
 INSERT INTO Etre_Disponible VALUES (3,6);
-INSERT INTO Etre_Disponible VALUES (3,2);
 INSERT INTO Etre_Disponible VALUES (4,4);
-INSERT INTO Etre_Disponible VALUES (4,3);
-INSERT INTO Etre_Disponible VALUES (5,7);
-INSERT INTO Etre_Disponible VALUES (5,1);
+INSERT INTO Etre_Disponible VALUES (4,5);
+
