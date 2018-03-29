@@ -12,15 +12,15 @@ INSERT INTO Activite VALUES (10,'Cuisine', 'Desserts', 0);
 INSERT INTO Activite VALUES (11,'Cuisine', 'Cueillir des fruits', 1);
 
 #-- Calendrier -- idCalendrier,dateC,HeureC,tempsMeteoC,
-INSERT INTO Calendrier VALUES (1,'2018-03-31','10:00:00',120);
-INSERT INTO Calendrier VALUES (2,'2018-03-31','14:00:00',120);
-INSERT INTO Calendrier VALUES (3,'2018-03-31','18:00:00',120);
-INSERT INTO Calendrier VALUES (4,'2018-04-01','10:00:00',120);
-INSERT INTO Calendrier VALUES (5,'2018-04-01','14:00:00',120);
-INSERT INTO Calendrier VALUES (6,'2018-04-01','18:00:00',120);
-INSERT INTO Calendrier VALUES (7,'2018-04-02','10:00:00',120);
-INSERT INTO Calendrier VALUES (8,'2018-04-02','14:00:00',120);
-INSERT INTO Calendrier VALUES (9,'2018-04-02','18:00:00',120);
+INSERT INTO Calendrier VALUES (1,'2018-03-31','09:00:00',120);
+INSERT INTO Calendrier VALUES (2,'2018-03-31','12:00:00',120);
+INSERT INTO Calendrier VALUES (3,'2018-03-31','15:00:00',120);
+INSERT INTO Calendrier VALUES (4,'2018-04-01','09:00:00',120);
+INSERT INTO Calendrier VALUES (5,'2018-04-01','12:00:00',120);
+INSERT INTO Calendrier VALUES (6,'2018-04-01','15:00:00',120);
+INSERT INTO Calendrier VALUES (7,'2018-04-02','09:00:00',120);
+INSERT INTO Calendrier VALUES (8,'2018-04-02','12:00:00',120);
+INSERT INTO Calendrier VALUES (9,'2018-04-02','15:00:00',120);
 
 
 #-- Personne -- idPersonne, prenomP, nomP, addresseP, numeroTelP, mailP, idActiviteMaitriseP, idActiviteSouhaiteP,
