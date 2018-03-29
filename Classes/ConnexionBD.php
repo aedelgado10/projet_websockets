@@ -1,13 +1,11 @@
 <?php
-	class ConnexionBD extends PDO{
+	$dsn = 'mysql:host=localhost;dbname=WebSockets';
+	$username = 'root';
+	$password = '';
+	$options = array(
+	    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+	);
 
-		public function __construct($usr,$mdp,$addr_host,$nom_bd){
-			$this->dsn = "mysql:host=$addr_host;dbname=$nom_bd;";
-			parent::__construct($this->dsn,$usr,$mdp);
-		}
-
-		
-	}
-
+	$dbh = new PDO($dsn, $username, $password, $options);
 
 ?>
