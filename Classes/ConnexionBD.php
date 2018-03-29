@@ -8,8 +8,7 @@
 
 	$dbh = new PDO($dsn, $username, $password, $options);
 
-	function exec_select($req){
-		global $dbh;
+	function exec_select($dbh,$req){
 
 		if (!empty($req)){
 			$stm = $dbh->prepare($req);
