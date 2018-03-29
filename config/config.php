@@ -9,8 +9,6 @@
 
 	//includes
 	include_once 'modules.php';
-	include_once 'ConnexionBD.php';
-
 	//Classes
 	include_once 'classes.php';
 ?>

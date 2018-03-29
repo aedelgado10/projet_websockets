@@ -1,5 +1,9 @@
 <?php
+include_once './Classes/ConnexionBD.php';
+include_once './config/config.php';
 
+
+// code pour tous les débuts HTML
 function base_start($secure = false)
 	{
 	    isset($_COOKIE["session"]) ? $logged = true : $logged = false;
@@ -31,10 +35,6 @@ function base_start($secure = false)
 		echo "
 		<!DOCTYPE html>
 		<html lang=\"fr\">
-			<?php
-				include_once './config/config.php';
-				include_once './Classes/ConnexionBD.php';
-			?>
 			<head>
 				<meta charset=\"utf-8\">
 					<title>Partage de compétences</title>
@@ -53,7 +53,9 @@ function base_start($secure = false)
 	                <div class=\"btn-sign\">
 	                   <a href=\"connexion.php?action=deconnexion\" class=\"login-window\">Déconnexion</a>
 	                </div>
-	            </div>";    
+	            </div>";
+
+	            echo "<h2 id=\"banner-title\"> Home </h2>";    
 	    		}
 	    		else
 	    		{
@@ -75,12 +77,25 @@ function base_start($secure = false)
 	                	</fieldset>
 	          			</form>
         			</div>";
+
+        			echo " <div id=\"register-box\" class=\"register-popup\">
+        					<p><i>Nouvel arrivant?</i></p>
+        					<form class=\"signup\" action=\"register.php\">
+        						<button class=\"submit button\" type=\"submit\">Créer un compte</button>
+        					</form>
+        				</div>	
+						";
 	   			 }
 		                                
 				echo "	</div>";
 
+				
+
 	}
 
+
+
+// code pour toutes les fins HTML
 	function base_end()
 	{
 		echo "
