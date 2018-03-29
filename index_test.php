@@ -8,15 +8,19 @@
  		isset($_COOKIE["session"]) ? $logged = true : $logged = false;
 
  		if($logged){
+ 			echo "<div class=\"indexcontent\">";
  			echo "<br>";
  			echo "<h4> Voici l'activité que vous souhaitez apprendre </h4>";
  			echo "<h4> Voici l'activité dont vous êtes disponible pour enseigner</h4><br><br>";
+ 			echo "</div>";
  		}
  		else{
+ 			echo "<div class=\"indexcontent\">";
  			echo"<br>";
  			echo "<h4> Envie de découvrir et partager? Vous avez des connaissances et vous souhaitez apprendre d'avantage? </h4>";
  			echo "<h5> INSCRIVEZ VOUS GRATUITEMENT </h5>";
  			echo "<i> Le partage c'est du savoir </i><br><br>";
+ 			echo "</div>";
  		}
  	?>
 
