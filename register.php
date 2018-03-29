@@ -1,6 +1,5 @@
 <?php 
     include 'defaults.php';
-    include_once './Classes/ConnexionBD.php';
     base_start();
  ?>
 
@@ -12,7 +11,7 @@
         <!-- Formulaire pour saisir la creation de compte-->
         <div id="register-box" class="register-popup">
         	<p><b>Données de l'utilisateur</b></p>
-        	<form method="post" class="signup" action="inputRegister.php">
+        	<form method="post" class="signup" action="envoyerRegister.php">
 			  Prénom:<br>
 			  <input type="text" name="prenom" value="" placeholder="Jean">
 			  <br>
@@ -41,6 +40,7 @@
 
 			  <h3> Activité que vous souhaitez apprendre </h3>
 
+
 			  <?php  
 			  		$query = "SELECT nomA FROM Activite GROUP BY nomA";
 
@@ -51,9 +51,10 @@
 				            $resultats[] = $data;
 				    }
 
+				    // Activité
 				  	foreach ($resultats as $key => $value) {
 				  		$val = $resultats[$key]['nomA'];
-				  		echo "<input type=\"radio\" name=\"gender\" value=\"$val\"> $val <br>";
+				  		echo "<input type=\"radio\" name=\"ActiviteA\" value=\"$val\"> $val <br>";
 
 				  		$query2 = "SELECT typeA FROM Activite WHERE nomA='$val' GROUP BY typeA";
 
@@ -63,6 +64,7 @@
 				        	$resultats2[] = $data2;
 				    	}
 
+				    	// Domaine
 				    	echo "<select name=\"$val\">";
 				    	foreach ($resultats2 as $key2 => $value2) {
 				    		    $val2 = $resultats2[$key2]['typeA'];
@@ -87,7 +89,7 @@
 
 				  	foreach ($resultats as $key => $value) {
 				  		$val = $resultats[$key]['nomA'];
-				  		echo "<input type=\"radio\" name=\"gender\" value=\"$val\"> $val <br>";
+				  		echo "<input type=\"radio\" name=\"ActiviteE\" value=\"$val\"> $val <br>";
 
 				  		$query2 = "SELECT typeA FROM Activite WHERE nomA='$val' GROUP BY typeA";
 
