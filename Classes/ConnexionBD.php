@@ -8,4 +8,16 @@
 
 	$dbh = new PDO($dsn, $username, $password, $options);
 
+	function exec_select($req){
+		global $dbh;
+
+		if (!empty($req)){
+			$stm = $dbh->prepare($req);
+			$res = $stm->execute();
+
+			return [$stm,$res];
+		}
+
+		return false;
+	}
 ?>
