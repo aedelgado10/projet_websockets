@@ -9,9 +9,9 @@
         <h2 id="banner-title">Création de Compte</h2>	
 
         <!-- Formulaire pour saisir la creation de compte-->
-        <div id="register-box" class="register-popup">
+        <div id="registerformulaire">
         	<p><b>Données de l'utilisateur</b></p>
-        	<form method="post" class="signup" action="envoyerRegister.php">
+        	<form method="post" class="form-group" action="envoyerRegister.php">
 			  Prénom:<br>
 			  <input type="text" name="prenom" value="" placeholder="Jean">
 			  <br>
@@ -110,12 +110,12 @@
 			  ?>
 
 			  <br><br>
-			  <input type="submit" value="Créer">
+			  <input type="submit" class="btn btn-success" value="Créer">
 
         	</form>
 
         	<a href="index_test.php"> 
-        		<button>
+        		<button class="btn btn-danger">
         			Annuler
         		</button>
         	</a>

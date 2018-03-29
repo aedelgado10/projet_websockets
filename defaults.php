@@ -59,12 +59,9 @@ function base_start($secure = false)
 					// vérification à faire par cookies non par session !
 		    		if($logged)
 		    		{
-		        		echo "<p class=\"connectedDialog\">  Bonjour " . $_COOKIE["session"] . "</p>";
-		        		echo "<div class=\"post\">
-		                <div class=\"btn-sign\">
-		                   <a href=\"connexion.php?action=deconnexion\" class=\"login-window connectedDialog\">Déconnexion</a>
-		                </div>
-		            </div>";
+		        		echo "<p class=\"connectedDialog\"><b>  Bonjour " . $_COOKIE["session"] . "</b></p>";
+
+		        		echo "<div class=\"login-window connectedDialog\"><a href=\"connexion.php?action=deconnexion\" class=\"btn btn-default\">Déconnexion</a></div>";
 
 		            echo "<h2 id=\"banner-title\"> Home </h2>";    
 		    		}
