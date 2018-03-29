@@ -1,17 +1,7 @@
-<!DOCTYPE html>
-<html lang="fr">
-<?php
-	include './config/config.php';
-?>
-<head>
-	<meta charset="utf-8">
-	<title>Partage de compétences</title>
-	<link rel="stylesheet" type="text/css" href="config/modules/bootstrap4/css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="config/modules/bootstrap4/css/bootstrap.css">
-</head>
-<body>
-
-	<h1 id="banner-title">Création de Compte</h1>	
+<?php 
+    include 'defaults.php';
+    base_start();
+ ?>
 
 	<!-- Formulaire pour se connecter-->
         <div id="login-box" class="login-popup">
@@ -32,6 +22,9 @@
           </form>
         </div>
 
+        <h2 id="banner-title">Création de Compte</h2>	
+
+        <!-- Formulaire pour saisir la creation de compte-->
         <div id="register-box" class="register-popup">
         	<p><b>Données de l'utilisateur</b></p>
         	<form method="post" class="signup" action="inputRegister.php">
@@ -62,48 +55,13 @@
 			  <input type="submit" value="Créer">
         	</form>
 
-        	<a href="index.php"> 
+        	<a href="index_test.php"> 
         		<button>
         			Annuler
         		</button>
         	</a>
         </div>	
 
-
-        <div class="mentions">
-            <caption>Mention légales</caption>
-            <table height="75px" width="100%" border ="1" cellspacing="1" cellpadding="1" >
-                <tr>
-                    <td> Nous contacter : contact@andresdelgado.fr</td>
-                </tr>
-            </table>
-        </div>
-
-
-
-
-
-
-	<script type="text/javascript" src="config/modules/bootstrap4/js/bootstrap.js"></script>
-	<script type="text/javascript" src="config/modules/jquery/jquery-3.3.1.min.js"></script>
-
-	<script type="text/javascript">
-		var host = "<?php echo WS_HOST; ?>";
-
-		try{
-			var cx = new WebSocket(host);
-
-			console.log(cx.readyState);
-			cx.onopen = function(msg){
-				console.log(msg);
-			};
-
-			cx.onmessage = function(msg){ console.log("Received: "+msg.data); };
-			cx.onclose   = function(msg){ console.log("Disconnected - status "+this.readyState); };
-		}catch(ex){
-			console.log(ex);
-		}
-	</script>
-</body>
-</html>
-
+<?php 
+    base_end();
+ ?>
