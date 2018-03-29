@@ -9,6 +9,11 @@
 	<link rel="stylesheet" type="text/css" href="config/modules/bootstrap4/css/bootstrap.css">
 </head>
 <body>
+
+	<div>
+		<textarea id="texto"></textarea>
+	</div>
+	<script type="text/javascript" src="functions.js"></script>
 	<script type="text/javascript">
 		var host = "<?php echo WS_HOST; ?>";
 
@@ -26,7 +31,10 @@
 				console.log(msg);
 			};
 
-			cx.onmessage = function(msg){ console.log(msg); };
+			cx.onmessage = function(msg){
+				console.log(JSON.parse(msg.data));
+			};
+
 			cx.onclose   = function(msg){ console.log("Disconnected - status "+this.readyState); };
 		}catch(ex){
 			console.log(ex);

@@ -23,19 +23,25 @@
 		}
 
 		function process($user,$msg){
-		
+
 			if (!empty($msg)){
 				$infos = json_decode($msg,true);
 
 				if (isset($infos["cmd"])){
 					if ($infos["cmd"] == 'meteo'){
 					$w_result = $this->get_weather($infos["city"]);
-					var_dump($w_result);
-					var_dump($this->get_wicon($w_result));	
+					$this->sendjson($user,$w_result);
+					$this->sendjson($user,$this->get_wicon($w_result));
+					//var_dump($w_result);
+					//var_dump($this->get_wicon($w_result));	
 					}
 				}
 				//$this->send($user->socket,);
 			}
+		}
+
+		function sendjson($user,$data){
+			$this->send($user->socket,json_encode($data));
 		}
 	}
 ?>
