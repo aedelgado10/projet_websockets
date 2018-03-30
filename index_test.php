@@ -20,7 +20,7 @@
 
 		    // exécution de la requête sql
 		    $res = exec_select($dbh,$query); 
-		    $resultats = [];
+		    $resultats = array();
 		    while ($data = $res[0]->fetch(PDO::FETCH_ASSOC)){
 		            $resultats[] = $data;
 		    }
@@ -38,7 +38,7 @@
 
 		    // exécution de la requête sql
 		    $res = exec_select($dbh,$query); 
-		    $resultats = [];
+		    $resultats = array();
 		    while ($data = $res[0]->fetch(PDO::FETCH_ASSOC)){
 		            $resultats[] = $data;
 		    }
@@ -56,7 +56,7 @@
 
 		    // exécution de la requête sql
 		    $res = exec_select($dbh,$query); 
-		    $resultats = [];
+		    $resultats = array();
 		    while ($data = $res[0]->fetch(PDO::FETCH_ASSOC)){
 		            $resultats[] = $data;
 		    }
@@ -69,7 +69,7 @@
     		  	$query = "SELECT idCalendrier,dateC, heureC FROM Calendrier";
 
 		  		$res = exec_select($dbh,$query); 
-		   		$resultats = [];
+		   		$resultats = array();
 		   		while ($data = $res[0]->fetch(PDO::FETCH_ASSOC)){
 		        	$resultats[] = $data;
 		    	}
@@ -90,7 +90,7 @@
 		    	$query = "SELECT c.dateC, c.heureC FROM Calendrier as c, Personne as p, Etre_Disponible as e WHERE p.login = '$_COOKIE[session]' and p.idPersonne = e.idPersonne and e.idCalendrier = c.idCalendrier";
 
 				$res = exec_select($dbh,$query); 
-				$resultats = [];
+				$resultats = array();
 				while ($data = $res[0]->fetch(PDO::FETCH_ASSOC)){
 					$resultats[] = $data;
 				}

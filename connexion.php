@@ -32,7 +32,7 @@
 
     // exécution de la requête sql
     $res = exec_select($dbh,$query); 
-    $resultats = [];
+    $resultats = array();
     while ($data = $res[0]->fetch(PDO::FETCH_ASSOC)){
             $resultats[] = $data;
     }

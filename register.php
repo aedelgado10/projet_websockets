@@ -46,7 +46,7 @@
 
 				    // exécution de la requête sql
 				    $res = exec_select($dbh,$query); 
-				    $resultats = [];
+				    $resultats = array();
 				    while ($data = $res[0]->fetch(PDO::FETCH_ASSOC)){
 				            $resultats[] = $data;
 				    }
@@ -59,7 +59,7 @@
 				  		$query2 = "SELECT typeA FROM Activite WHERE nomA='$val' GROUP BY typeA";
 
 				  		$res2 = exec_select($dbh,$query2); 
-				   		$resultats2 = [];
+				   		$resultats2 = array();
 				   		while ($data2 = $res2[0]->fetch(PDO::FETCH_ASSOC)){
 				        	$resultats2[] = $data2;
 				    	}
@@ -82,7 +82,7 @@
 
 				    // exécution de la requête sql
 				    $res = exec_select($dbh,$query); 
-				    $resultats = [];
+				    $resultats = array();
 				    while ($data = $res[0]->fetch(PDO::FETCH_ASSOC)){
 				            $resultats[] = $data;
 				    }
@@ -94,7 +94,7 @@
 				  		$query2 = "SELECT typeA FROM Activite WHERE nomA='$val' GROUP BY typeA";
 
 				  		$res2 = exec_select($dbh,$query2); 
-				   		$resultats2 = [];
+				   		$resultats2 = array();
 				   		while ($data2 = $res2[0]->fetch(PDO::FETCH_ASSOC)){
 				        	$resultats2[] = $data2;
 				    	}

@@ -37,7 +37,11 @@
 			}
 		}
 
-		public static function pdateFr(int $timestamp){
+		public static function get_heure($element){
+			return date('H',$element);
+		}
+
+		public static function pdateFr($timestamp){
 			return date('d-m-Y',$timestamp);
 		}
 
@@ -50,7 +54,7 @@
 		*			}
 		*	Cette fonction compare les deux dates. 
 		*/
-		public static function est_jour(int $date_input, int $date_donnee){
+		public static function est_jour($date_input, $date_donnee){
 			$d_i = Partage::pdateFr($date_input);
 			$d_d = Partage::pdateFr($date_donnee);
 
@@ -73,6 +77,13 @@
 			return WICON_P.$icon_name.'.png';
 		}
 
+		private function get_winfo($element){
+			if ((!empty($element)) && (is_array($element))){
+				array_key_exists("weather", $element);
+				return $element["weather"][0];
+			}
+		}
+
 		function process($user,$msg){
 
 			if (!empty($msg)){
@@ -88,10 +99,23 @@
 						$w_result = $this->get_forecast($infos["city"]);
 						$liste = $this->get_wlist($w_result);
 
+						$meteo_infos = array();
+
 						foreach ($liste as $k => $data) {
-							$date_meteo = Partage::pdateFr($this->get_date($data));
-							$this->send($date_meteo);
+							$tms = $this->get_date($data);
+							$jour = Partage::pdateFr($tms);
+
+							if (!array_key_exists($jour, $date_meteo)){
+								$date_meteo[$jour]["heures"] = array();	// s*le interpréteur trop vieux. Il connait pas le =[]
+
+							}
+							
+							$heure_i = $this->get_heure($tms);
+							$date_meteo[$jour]["heures"][$heure_i] = array();
+							$w_info = $this->get_winfo($data);
+							$date_meteo[$jour]["heures"][$heure_i] = $w_info; 
 						}
+						$this->sendjson($user,$date_meteo);
 						//$this->sendjson($user,$w_result);
 						return true;
 					}

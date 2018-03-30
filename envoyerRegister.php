@@ -21,7 +21,7 @@
 
 	    // exécution de la requête sql
 	    $res = exec_select($dbh,$query); 
-	    $resultats = [];
+	    $resultats = array();
 	    while ($data = $res[0]->fetch(PDO::FETCH_ASSOC)){
 	            $resultats[] = $data;
 	    }
@@ -35,7 +35,7 @@
 
 	    // exécution de la requête sql
 	    $res = exec_select($dbh,$query); 
-	    $resultats = [];
+	    $resultats = array();
 	    while ($data = $res[0]->fetch(PDO::FETCH_ASSOC)){
 	            $resultats[] = $data;
 	    }
@@ -47,7 +47,7 @@
 
 	    // exécution de la requête sql
 	    $res = exec_select($dbh,$query); 
-	    $resultats = [];
+	    $resultats = array();
 	    while ($data = $res[0]->fetch(PDO::FETCH_ASSOC)){
 	            $resultats[] = $data;
 	    }
@@ -57,7 +57,7 @@
 	// envoi des infos concernant les activités au serveur
 
 	$requete="INSERT INTO Interesser VALUES ('Apprendre', '$idAA', '$idp');
-	          INSERT INTO Interesser VALUES ('Apprendre', '$idAE', '$idp');";
+	          INSERT INTO Interesser VALUES ('Enseigner', '$idAE', '$idp');";
 	$res = exec_select($dbh,$requete); 
 
 	echo "<h3> Votre compte a été crée avec succès ! Vous pouvez désormais vous connecter.</h3>";
