@@ -49,7 +49,13 @@
 		    $typ=$resultats[0]['typeA'];
 
 		    echo "<p class=\"btn btn-success\"> $act, $typ </p> <br><br>";
-		    echo "<h4>Vous devez choisir votre créneau (durée 2h) de disponibilité pour matcher avec quelqu'un</h4>";
+		    echo "<h5>Vous devez choisir votre créneau (durée 2h) de disponibilité pour matcher avec quelqu'un</h5>";
+
+		    echo "<h7> Le service est actuellement: <span id=\"status_ws\"></span></h7>";
+		    echo "<p id='more_info'> </p>";
+
+		    include './views/script_websocket.phtml';
+		    include './views/affiche_dispo.phtml';
 
 		}
 
@@ -112,44 +118,6 @@
 
  			echo "</div>";
  	?>
-
- 	<script type="text/javascript" src="functions.js"></script>
- 	<script type="text/javascript">
- 		var host = "<?php echo WS_HOST; ?>";
-
-		try{
-			var cx = new WebSocket(host);
-
-			console.log(cx.readyState);
-
-			var meteoTest = {
-				"cmd" : "meteo",
-				"city" : "Toulouse"
-			};
-
-			var cmd_users = {
-				"cmd" : "users"
-			};
-
-			cx.onopen = function(msg){
-				send_json(this,cmd_users);
-			};
-
-			cx.onmessage = function(msg){
-				var data = JSON.parse(msg.data);
-
-				if (data.cmd == 'users'){
-					console.log('Il y a ' + data.nb_users + 'usagers connectés sur la plateforme');
-				}
-
-				//$('#texto').append(JSON.parse(msg.data));
-			};
-
-			cx.onclose   = function(msg){ console.log("Disconnected - status "+this.readyState); };
-		}catch(ex){
-			console.log(ex);
-		}
- 	</script>
 
 <?php 
     base_end();

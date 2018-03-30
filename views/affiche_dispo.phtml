@@ -1,0 +1,61 @@
+<?php 
+
+	include './queries/construction_calendrier.php';	//$calendrier se trouve là-dedans
+
+	function date_sort($calen){
+
+		$par_date = array();
+
+		foreach ($calen as $k => $cal){
+			
+			$date = $cal["dateC"];
+
+			if (!array_key_exists($date, $par_date)){
+				$par_date[$date] = array();
+			}
+
+			$par_date[$date][] = $cal;
+		}
+
+		return $par_date;
+	}
+
+	function t_ligne($t_jour,$calen){
+		$tms = strtotime($t_jour);
+		echo "<tr>
+			<td id='$tms'>".date("l",$tms)."</td>
+			<td id='".$calen[$t_jour][0]['idCalendrier']."'>".$calen[$t_jour][0]["heureC"]."
+				<span class='meteo_icon'></span>
+			</td>
+			<td id='".$calen[$t_jour][1]['idCalendrier']."'>".$calen[$t_jour][1]["heureC"]."
+				<span class='meteo_icon'></span>
+			</td>
+			<td id='".$calen[$t_jour][2]['idCalendrier']."'>".$calen[$t_jour][2]["heureC"]."
+				<span class='meteo_icon'></span>
+			</td>
+			<td>".toHeure($calen[$t_jour][0]["duree"])."h</td>";	// Toutes les durées sont égales..
+		echo '</tr>';
+	}
+
+	function toHeure($dureeMinutes){
+		return $dureeMinutes/60;
+	}
+
+?>
+
+<table class="table table-hover">
+	<tr>
+		<td>Jour</td>
+		<td>Créneau 1</td>
+		<td>Créneau 2</td>
+		<td>Créneau 3</td>
+		<td>Durée</td>
+	</tr>
+	<?php
+		$calendrier = date_sort($calendrier);
+
+		foreach ($calendrier as $date => $liste_details) {
+			t_ligne($date,$calendrier);
+		}
+	?>
+</table>

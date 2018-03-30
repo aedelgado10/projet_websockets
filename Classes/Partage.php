@@ -76,7 +76,7 @@
 		private function get_wicon($w_result){
 
 			if (!empty($w_result)){
-				$icon_name = $w_result["weather"][0]["icon"];
+				$icon_name = $w_result["icon"];
 			}
 			return WICON_P.$icon_name.'.png';
 		}
@@ -99,10 +99,15 @@
 
 				if (isset($infos["cmd"])){
 					if ($infos["cmd"] == 'meteo_j'){
+
+						$w_result["cmd"] = "meteo_j";
 						$w_result = $this->get_weather($infos["city"]);
+
 						$this->sendjson($user,$w_result);
 						$this->sendjson($user,$this->get_wicon($w_result));
+
 						return true;
+
 					}else if($infos["cmd"] == 'meteo_f'){
 						$w_result = $this->get_forecast($infos["city"]);
 						$liste = $this->get_wlist($w_result);
@@ -119,10 +124,14 @@
 							}
 							
 							$heure_i = $this->get_heure($tms);
-							$date_meteo[$jour]["heures"][$heure_i] = array();
+							$date_meteo[$jour]["heures"]["$heure_i"] = array();
 							$w_info = $this->get_winfo($data);
-							$date_meteo[$jour]["heures"][$heure_i] = $w_info; 
+							$w_info["icon"] = $this->get_wicon($w_info);
+							$date_meteo[$jour]["heures"]["$heure_i"] = $w_info; 
+							$date_meteo[$jour]["dt"] = strtotime($jour); 
 						}
+
+						$date_meteo["cmd"] = 'meteo_f';		
 						$this->sendjson($user,$date_meteo);
 						//$this->sendjson($user,$w_result);
 						return true;

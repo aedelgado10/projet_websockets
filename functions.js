@@ -19,3 +19,7 @@ function close_ws(ws){
 function send_json(ws,data){
 	return cx.send(JSON.stringify(data));
 }
+
+function gminfo(data){
+	$('#more_info').html(data);
+}

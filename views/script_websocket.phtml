@@ -1,0 +1,72 @@
+<script type="text/javascript" src="functions.js"></script>
+<script type="text/javascript">
+		function placer_icones(crushed_d){
+			var tms_list = [];
+			for (var tms in crushed_d){
+				
+				if (tms != 'cmd'){
+					tms_list.push();
+					var creneau = crushed_d[tms].dt;
+
+					//oui ok c'est un peu pipé
+					try{
+						console.log($(creneau).parent().find('.meteo_icon'));
+						$(creneau).parent().find('.meteo_icon')[0].html("<img src='"+crushed_d[tms].heures["09"].icon+"'>");
+						$(creneau).parent().find('.meteo_icon')[1].html("<img src='"+crushed_d[tms].heures["12"].icon+"'>");
+						$(creneau).parent().find('.meteo_icon')[2].html("<img src='"+crushed_d[tms].heures["15"].icon+"'>");
+						
+					}catch(ex){
+						console.log(creneau + "n'existe pas");
+					}
+				}
+			}
+			
+		}
+
+ 		var host = "<?php echo WS_HOST; ?>";
+
+		try{
+			var cx = new WebSocket(host);
+
+			console.log(cx.readyState);
+
+			var cmd_users = {
+				"cmd" : "users"
+			};
+
+			cx.onopen = function(msg){
+				send_json(this,cmd_users);
+				$('#status_ws').html(service_status(this.readyState));
+
+				var cmdMeteo = {
+					"cmd" : "meteo_f",
+					"city" : "Toulouse"
+				};
+
+				try{
+					send_json(this,cmdMeteo);
+				}catch(ex){
+					console.log(ex);
+				}
+			};
+
+			cx.onmessage = function(msg){
+				var data = JSON.parse(msg.data);
+
+				if (data.cmd == 'users'){
+					gminfo('Il y a ' + data.nb_users + ' usager(s) connectés sur la plateforme');
+				}else if(data.cmd == 'meteo_f'){
+					console.log(data);
+					placer_icones(data);
+				}
+
+				//$('#texto').append(JSON.parse(msg.data));
+			};
+
+			cx.onclose = function(msg){
+				service_status(this.readyState);
+			};
+		}catch(ex){
+			console.log(ex);
+		}
+</script>
