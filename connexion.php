@@ -51,7 +51,7 @@
     {
         // si il n'y a aucune ligne alors
         // l'utilisateur n'existe pas !
-        // réaction à changer peut être...
+        // comportement à changer peut-être...
         header('Location: erreur.php?error=User non trouve');
         die();
     }
@@ -63,7 +63,7 @@
     }
     else
     {   // username et password OK
-        // le cookie expire en 15 minutes (valeur arbitraire à revoir plus tard probablement)
+        // le cookie expire après 15 minutes (valeur arbitraire à revoir plus tard probablement)
         setcookie("session", "$username", time() + 600);
 
         header('Location: index_test.php');

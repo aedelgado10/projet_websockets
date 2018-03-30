@@ -15,3 +15,7 @@ function service_status(codeWS){
 function close_ws(ws){
 	ws.close();
 }
+
+function send_json(ws,data){
+	return cx.send(JSON.stringify(data));
+}

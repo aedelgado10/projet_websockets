@@ -7,7 +7,10 @@
  	<?php  
  		isset($_COOKIE["session"]) ? $logged = true : $logged = false;
 
- 		if($logged){
+ 		if(!$logged){
+ 			include_once './views/not_logged.phtml';
+ 		}
+ 		else{
  			echo "<div class=\"indexcontent\">";
  			echo "<br>";
 
@@ -46,9 +49,11 @@
 		    $typ=$resultats[0]['typeA'];
 
 		    echo "<p class=\"btn btn-success\"> $act, $typ </p> <br><br>";
+		    echo "<h4>Vous devez choisir votre créneau (durée 2h) de disponibilité pour matcher avec quelqu'un</h4>";
 
+		}
 
-
+/*
 		    // Recherche des créneaux de disponibilité
 		    $query = "SELECT p.idPersonne
 					  FROM Personne as p, Etre_Disponible as e
@@ -101,21 +106,50 @@
 
 		    	echo "<p class=\"btn btn-info\"> $date | $heure </p> <br><br>";
 
-		    }
+		    }*/
 
 
 
  			echo "</div>";
- 		}
- 		else{
- 			echo "<div class=\"indexcontent\">";
- 			echo"<br>";
- 			echo "<h4> Envie de découvrir et partager? Vous avez des connaissances et vous souhaitez apprendre d'avantage? </h4>";
- 			echo "<h5> INSCRIVEZ VOUS GRATUITEMENT </h5>";
- 			echo "<i> Le partage c'est du savoir </i><br><br>";
- 			echo "</div>";
- 		}
  	?>
+
+ 	<script type="text/javascript" src="functions.js"></script>
+ 	<script type="text/javascript">
+ 		var host = "<?php echo WS_HOST; ?>";
+
+		try{
+			var cx = new WebSocket(host);
+
+			console.log(cx.readyState);
+
+			var meteoTest = {
+				"cmd" : "meteo",
+				"city" : "Toulouse"
+			};
+
+			var cmd_users = {
+				"cmd" : "users"
+			};
+
+			cx.onopen = function(msg){
+				send_json(this,cmd_users);
+			};
+
+			cx.onmessage = function(msg){
+				var data = JSON.parse(msg.data);
+
+				if (data.cmd == 'users'){
+					console.log('Il y a ' + data.nb_users + 'usagers connectés sur la plateforme');
+				}
+
+				//$('#texto').append(JSON.parse(msg.data));
+			};
+
+			cx.onclose   = function(msg){ console.log("Disconnected - status "+this.readyState); };
+		}catch(ex){
+			console.log(ex);
+		}
+ 	</script>
 
 <?php 
     base_end();

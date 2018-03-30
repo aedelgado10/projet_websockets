@@ -1,6 +1,10 @@
 <?php
 	class Partage extends WebSocket{
 
+		public function __construct($address,$port){
+			parent::__construct($address,$port);
+		}
+
 		private function get_from_api($request){
 			if (!empty($request)){
 				return file_get_contents($request);
@@ -84,6 +88,10 @@
 			}
 		}
 
+		public function count_users(){
+			return count($this->users);
+		}
+
 		function process($user,$msg){
 
 			if (!empty($msg)){
@@ -117,6 +125,11 @@
 						}
 						$this->sendjson($user,$date_meteo);
 						//$this->sendjson($user,$w_result);
+						return true;
+					}else if($infos["cmd"] == 'users'){
+						$users["cmd"] = "users";
+						$users["nb_users"] = $this->count_users();
+						$this->sendjson($user,$users);
 						return true;
 					}
 				}
