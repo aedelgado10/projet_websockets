@@ -21,9 +21,11 @@
 						}else{
 							$($("#"+creneau).parent().find('.meteo_icon')[1]).parent().on('click',function(e){
 								alert('Créneau choisi');
+								//var id = $($("#"+creneau).parent().find('.meteo_icon')[1]).parent().attr('id');
+								console.log(id);
 								/*var choisir_creneau = {
 									"cmd" : "choice",
-									"idC" : this.attr('id')
+									"idC" : id
 								}*/
 								//send_json()
 							});
