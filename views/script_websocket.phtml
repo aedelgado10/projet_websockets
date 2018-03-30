@@ -9,17 +9,40 @@
 					var creneau = crushed_d[tms].dt;
 
 					//oui ok bon c'est un peu pipé
+
 					try{
-						if (crushed_d[tms].heures["09"].id != '800'){
+						var depend_m = <?php 
+							include_once './queries/construction_calendrier.php';
+							echo $dependant_meteo;
+						?>;
+
+						if ((crushed_d[tms].heures["09"].id != '800') && (depend_m == 1)){
 							$($("#"+creneau).parent().find('.meteo_icon')[0]).parent().attr('bgcolor','#FF8080');
+						}else{
+							$($("#"+creneau).parent().find('.meteo_icon')[1]).parent().on('click',function(e){
+								alert('Créneau choisi');
+								/*var choisir_creneau = {
+									"cmd" : "choice",
+									"idC" : this.attr('id')
+								}*/
+								//send_json()
+							});
 						}
 
-						if (crushed_d[tms].heures["12"].id != '800'){
+						if ((crushed_d[tms].heures["12"].id != '800') && (depend_m == 1)){
 							$($("#"+creneau).parent().find('.meteo_icon')[1]).parent().attr('bgcolor','#FF8080');
+						}else{
+							$($("#"+creneau).parent().find('.meteo_icon')[1]).parent().on('click',function(e){
+								alert('Créneau choisi');
+							});
 						}
 
-						if (crushed_d[tms].heures["15"].id != '800'){
+						if ((crushed_d[tms].heures["15"].id != '800') && (depend_m == 1)){
 							$($("#"+creneau).parent().find('.meteo_icon')[2]).parent().attr('bgcolor','#FF8080');
+						}else{
+							$($("#"+creneau).parent().find('.meteo_icon')[2]).parent().on('click',function(e){
+								alert('Créneau choisi');
+							});
 						}
 
 						$($("#"+creneau).parent().find('.meteo_icon')[0]).html("<img src='"+crushed_d[tms].heures["09"].icon+"'>");
