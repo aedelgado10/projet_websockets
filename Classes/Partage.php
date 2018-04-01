@@ -119,7 +119,7 @@
 							$jour = Partage::pdateFr($tms);
 
 							if (!array_key_exists($jour, $date_meteo)){
-								$date_meteo[$jour]["heures"] = array();	// s*le interpréteur trop vieux. Il connait pas le =[]
+								$date_meteo[$jour]["heures"] = array();
 
 							}
 							
@@ -140,6 +140,21 @@
 						$users["nb_users"] = $this->count_users();
 						$this->sendjson($user,$users);
 						return true;
+					}else if($infos["cmd"] == "creneau_c"){
+						$id = $infos["data"];
+
+						$infosend["cmd"] 			= "creneau_c";
+						$infosend["data"] 			= $id;
+						$infosend["c_choisi"] 		= $infos["c_choisi"];
+						$infosend["data_creneau"]	= $infos["data_creneau"];
+						$infosend["id_creneau"]		= date('Y-m-d',$infos["id_creneau"]);
+
+						foreach ($this->users as $key => $value) {
+							$this->sendjson($value,$infosend);
+						}
+					}else if($infos["cmd"] == "date"){
+						$this->sendjson(date('Y-m-d',$infos["data"]));
+						echo date('Y-m-d',$infos["data"]);
 					}
 				}
 			}

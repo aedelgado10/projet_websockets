@@ -1,6 +1,15 @@
 <script type="text/javascript" src="functions.js"></script>
 <script type="text/javascript">
+		var deja_choisi_moi = false;
+		var match = false;
+		var id_cp_m = "";
+
 		function placer_icones(crushed_d){
+			var depend_m = <?php 
+				include_once './queries/construction_calendrier.php';
+				echo $dependant_meteo;
+			?>;
+
 			var tms_list = [];
 			for (var tms in crushed_d){
 				
@@ -11,49 +20,56 @@
 					//oui ok bon c'est un peu pipé
 
 					try{
-						var depend_m = <?php 
-							include_once './queries/construction_calendrier.php';
-							echo $dependant_meteo;
-						?>;
 
-						if ((crushed_d[tms].heures["09"].id != '800') && (depend_m == 1)){
-							$($("#"+creneau).parent().find('.meteo_icon')[0]).parent().attr('bgcolor','#FF8080');
-						}else{
-							$($("#"+creneau).parent().find('.meteo_icon')[1]).parent().on('click',function(e){
-								alert('Créneau choisi');
-								//var id = $($("#"+creneau).parent().find('.meteo_icon')[1]).parent().attr('id');
-								console.log(id);
-								/*var choisir_creneau = {
-									"cmd" : "choice",
-									"idC" : id
-								}*/
-								//send_json()
-							});
-						}
+						var liste_h = ["09","12","15"];
 
-						if ((crushed_d[tms].heures["12"].id != '800') && (depend_m == 1)){
-							$($("#"+creneau).parent().find('.meteo_icon')[1]).parent().attr('bgcolor','#FF8080');
-						}else{
-							$($("#"+creneau).parent().find('.meteo_icon')[1]).parent().on('click',function(e){
-								alert('Créneau choisi');
-							});
-						}
+						for (var i=0;i<3;i++){
 
-						if ((crushed_d[tms].heures["15"].id != '800') && (depend_m == 1)){
-							$($("#"+creneau).parent().find('.meteo_icon')[2]).parent().attr('bgcolor','#FF8080');
-						}else{
-							$($("#"+creneau).parent().find('.meteo_icon')[2]).parent().on('click',function(e){
-								alert('Créneau choisi');
-							});
-						}
+							if ((crushed_d[tms].heures[liste_h[i]].id != "800") && (depend_m == 1)){
+								$($("#"+creneau).parent().find('.meteo_icon')[i]).parent().attr('bgcolor','#FF8080');
+							}else{
+								$($("#"+creneau).parent().find('.meteo_icon')[i]).parent().on('click',function(e){
 
-						$($("#"+creneau).parent().find('.meteo_icon')[0]).html("<img src='"+crushed_d[tms].heures["09"].icon+"'>");
+									if (deja_choisi_moi){
+										alert("Vous avez déjà choisi un créneau d'échange de compétences");
+										
+									}else{
+										if (typeof $(this).attr('bgcolor') === 'undefined'){
+											$(this).attr('bgcolor',"#BACCFF")
+										}else if ($(this).attr('bgcolor') === "#BACCFF"){
+											$(this).attr('bgcolor','#FFFFFF');
+										}else{
+											$(this).attr('bgcolor',"#BACCFF");
+										}
+										
+										var creneau_j = $(this).parent().find(".timestamp_f")[0].id;
 
-						$($("#"+creneau).parent().find('.meteo_icon')[1]).html("<img src='"+crushed_d[tms].heures["12"].icon+"'>");
-						$($("#"+creneau).parent().find('.meteo_icon')[2]).html("<img src='"+crushed_d[tms].heures["15"].icon+"'>");
-						
+										var mon_id = "<?php echo $_COOKIE["session"]; ?>";
+										var c_choisi = $(this).attr('id');
+										var d_creneau = $(this).html();
+										d_creneau = d_creneau.split(" ");
+
+										var choisirc = {
+											"cmd"      		: "creneau_c",
+											"data" 	   		: mon_id,
+											"c_choisi" 		: c_choisi,
+											"data_creneau"	: d_creneau[0],
+											"id_creneau"	: creneau_j
+										};
+
+										send_json(cx,choisirc);
+										deja_choisi_moi = true;
+									}
+
+								});
+							}
+							$($("#"+creneau).parent().find('.meteo_icon')[0]).html("<img src='"+crushed_d[tms].heures["09"].icon+"'>");
+
+							$($("#"+creneau).parent().find('.meteo_icon')[1]).html("<img src='"+crushed_d[tms].heures["12"].icon+"'>");
+							$($("#"+creneau).parent().find('.meteo_icon')[2]).html("<img src='"+crushed_d[tms].heures["15"].icon+"'>");
+						}		
 					}catch(ex){
-						console.log(creneau + "n'existe pas");
+						console.log(creneau + ex);
 					}
 				}
 			}
@@ -96,9 +112,13 @@
 					console.log(data);
 					placer_icones(data);
 
+				}else if(data.cmd == 'creneau_c'){
+					alert(data.data + " vient de choisir le créneau suivant : " + " à " 
+						+ data.data_creneau + " le " + data.id_creneau);
+					$('#' + data.c_choisi).attr('bgcolor',"#BACCFF");
 				}
 
-				//$('#texto').append(JSON.parse(msg.data));
+				//$('#texto').append(JSON.parse(msg.data)) ;
 			};
 
 			cx.onclose = function(msg){

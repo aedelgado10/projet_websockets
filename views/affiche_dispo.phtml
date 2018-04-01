@@ -22,15 +22,15 @@
 
 	function t_ligne($t_jour,$calen){
 		$tms = strtotime($t_jour);
-		echo "<tr>
-			<td id='$tms'>".date("l",$tms)."</td>
-			<td id='".$calen[$t_jour][0]['idCalendrier']."'>".$calen[$t_jour][0]["heureC"]."
+		echo "<tr class='timestamp_p'>
+			<td id='$tms' class='timestamp_f'>".date("l",$tms)."</td>
+			<td id='".$calen[$t_jour][0]['idCalendrier']."'>".$calen[$t_jour][0]["heureC"]." 
 				<span class='meteo_icon'></span>
 			</td>
-			<td id='".$calen[$t_jour][1]['idCalendrier']."'>".$calen[$t_jour][1]["heureC"]."
+			<td id='".$calen[$t_jour][1]['idCalendrier']."'>".$calen[$t_jour][1]["heureC"]." 
 				<span class='meteo_icon'></span>
 			</td>
-			<td id='".$calen[$t_jour][2]['idCalendrier']."'>".$calen[$t_jour][2]["heureC"]."
+			<td id='".$calen[$t_jour][2]['idCalendrier']."'>".$calen[$t_jour][2]["heureC"]." 
 				<span class='meteo_icon'></span>
 			</td>
 			<td>".toHeure($calen[$t_jour][0]["duree"])."h</td>";	// Toutes les durées sont égales..
